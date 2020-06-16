@@ -38,9 +38,9 @@ class ViewController: UIViewController {
             }
             charIndex += 1
         }
-        //DispatchQueue.main.asyncAfter(deadline:.now() + 3.0, execute: {
-        //   self.performSegue(withIdentifier:"welcomeSegue",sender: self)
-        //})
+        DispatchQueue.main.asyncAfter(deadline:.now() + 3.0, execute: {
+           self.performSegue(withIdentifier:"welcomeSegue",sender: self)
+        })
             
     }
 

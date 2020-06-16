@@ -53,7 +53,7 @@
 		BF5D53AF24987EEF00B210B9 /* full.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = full.gif; sourceTree = "<group>"; };
 		BF78BDC12461BFA4007EE809 /* UIImage+gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+gif.swift"; sourceTree = "<group>"; };
 		BF78BDC72461C5F3007EE809 /* welcome.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = welcome.gif; sourceTree = "<group>"; };
-		BF86BD70245FF7F500DF537E /* Aco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aco.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF86BD70245FF7F500DF537E /* Neo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Neo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF86BD73245FF7F500DF537E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF86BD75245FF7F500DF537E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BF86BD77245FF7F500DF537E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		BF86BD71245FF7F500DF537E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BF86BD70245FF7F500DF537E /* Aco.app */,
+				BF86BD70245FF7F500DF537E /* Neo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -185,7 +185,7 @@
 			);
 			name = Neo;
 			productName = Neo;
-			productReference = BF86BD70245FF7F500DF537E /* Aco.app */;
+			productReference = BF86BD70245FF7F500DF537E /* Neo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -451,8 +451,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.i160209.Aco;
-				PRODUCT_NAME = Aco;
+				PRODUCT_BUNDLE_IDENTIFIER = com.i160209.Neo;
+				PRODUCT_NAME = Neo;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -469,8 +469,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.i160209.Aco;
-				PRODUCT_NAME = Aco;
+				PRODUCT_BUNDLE_IDENTIFIER = com.i160209.Neo;
+				PRODUCT_NAME = Neo;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

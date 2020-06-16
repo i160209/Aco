@@ -39,9 +39,9 @@ class ExitViewController: UIViewController {
             }
             charIndex += 1
         }
-        //Timer.scheduledTimer(withTimeInterval: 3 , repeats: false) { (timer) in
-        //    exit(-1)
-        //}
+        Timer.scheduledTimer(withTimeInterval: 3 , repeats: false) { (timer) in
+            exit(-1)
+        }
         
     }
     

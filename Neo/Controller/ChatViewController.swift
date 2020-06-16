@@ -31,6 +31,7 @@ class ChatViewController: UIViewController{
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
         checkSpeechMode()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -125,8 +126,8 @@ class ChatViewController: UIViewController{
         return false
     }
     
-    @objc func changeBotStateToDone() {
-        let botStateImage = UIImage.gif(name: K.BotStates.done)
+    @objc func changeBotStateToFound() {
+        let botStateImage = UIImage.gif(name: K.BotStates.found)
         botState.image = botStateImage
     }
     
@@ -135,17 +136,25 @@ class ChatViewController: UIViewController{
     }
     
     
-    func messagePasser(){
-        if let messageBody = messageTextField.text {
-            if messageBody == "" {
+    func messagePasser(identifier: Bool){
+        var messageBody: String
+        if identifier == true{
+            messageBody = messageTextField.text!
+        } else {
+            messageBody = speechStatusLabel.text!
+        }
+        
+            if messageBody == "" || messageBody == K.BotStates.placeHolder || messageBody == K.BotStates.placeWait {
+                if K.modeOfSpeech == 2 {
+                    let voice = Speak()
+                    voice.sayThis(message: "You didn't say anything!")
+                }
                 return
             }
-            if messageBody == "Exit" || messageBody == "exit" || messageBody == "Bye" || messageBody == "bye" || messageBody == "Bye Bye" || messageBody == "bye bye" || messageBody == "Bye bye" {
+            if messageBody == "Exit" || messageBody == "exit" || messageBody == "Bye" || messageBody == "bye" || messageBody == "Bye Bye" || messageBody == "bye bye" || messageBody == "Bye bye" || messageBody == "Bye-bye"{
                 performSegue(withIdentifier:"exitSegue",sender: self)
             }
-            if K.modeOfSpeech == 2 {
-                sendButton.setImage(UIImage(systemName: "mic.circle.fill"), for: UIControl.State.normal)
-            } else {
+            if K.modeOfSpeech != 2 {
                 sendButton.setImage(UIImage(systemName: "bubble.left.fill"), for: UIControl.State.normal)
             }
             
@@ -154,7 +163,7 @@ class ChatViewController: UIViewController{
             
             Timer.scheduledTimer(timeInterval: 3,
             target: self,
-            selector: #selector(self.changeBotStateToLookingAround),
+            selector: #selector(self.changeBotStateToFound),
             userInfo: nil,
             repeats: false)
             
@@ -168,16 +177,13 @@ class ChatViewController: UIViewController{
                 voice.sayThis(message: K.errorMessage)
             }
             
-            
             Timer.scheduledTimer(timeInterval: 5,
             target: self,
-            selector: #selector(self.changeBotStateToDone),
+            selector: #selector(self.changeBotStateToLookingAround),
             userInfo: nil,
             repeats: false)
             
-            if K.modeOfSpeech == 2 {
-                sendButton.setImage(UIImage(systemName: "mic.circle"), for: UIControl.State.normal)
-            } else {
+            if K.modeOfSpeech != 2 {
                 Timer.scheduledTimer(timeInterval: 2,
                 target: self,
                 selector: #selector(self.changeBubbleToEmpty),
@@ -186,7 +192,6 @@ class ChatViewController: UIViewController{
             }
             
             
-        }
         messageTextField.text = ""
     }
     
@@ -194,11 +199,11 @@ class ChatViewController: UIViewController{
         if K.modeOfSpeech == 2 {
             startSpeechToText()
         } else {
-            messagePasser()
+            messagePasser(identifier: true)
         }
     }
     @IBAction func enterPressed(_ sender: UITextField) {
-        messagePasser()
+        messagePasser(identifier: true)
     }
     
     func checkSpeechMode(){
@@ -220,6 +225,8 @@ class ChatViewController: UIViewController{
             self.audioEngine.stop()
             self.recognitionRequest?.endAudio()
             
+            let botStateImage = UIImage.gif(name: K.BotStates.done)
+            botState.image = botStateImage
             sendButton.setImage(UIImage(systemName: "mic.circle"), for: UIControl.State.normal)
         } else {
             self.startRecording()
@@ -308,16 +315,17 @@ class ChatViewController: UIViewController{
                     self.audioEngine.stop()
                     inputNode.removeTap(onBus: 0)
                     
-                    if let messageBody = self.speechStatusLabel.text {
-                        self.messages.append(Message(sender: "user", body: messageBody))
-                        self.loadMessages()
-                        if self.chatBot(message: messageBody) == false {
-                            self.messages.append(Message(sender: "bot", body: K.errorMessage))
-                            self.loadMessages()
-                            let voice = Speak()
-                            voice.sayThis(message: K.errorMessage)
-                        }
-                    }
+                    self.messagePasser(identifier: false)
+                    //if let messageBody = self.speechStatusLabel.text {
+                    //    self.messages.append(Message(sender: "user", body: messageBody))
+                    //    self.loadMessages()
+                    //    if self.chatBot(message: messageBody) == false {
+                    //        self.messages.append(Message(sender: "bot", body: K.errorMessage))
+                    //        self.loadMessages()
+                    //        let voice = Speak()
+                    //        voice.sayThis(message: K.errorMessage)
+                    //    }
+                    //}
 
                     self.recognitionRequest = nil
                     self.recognitionTask = nil
